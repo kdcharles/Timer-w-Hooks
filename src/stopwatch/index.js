@@ -61,10 +61,10 @@ const StopWatch = () => {
                     miliseconds: ((Date.now() - startTime) % 1000).toString().padStart(3, '0'),
                     seconds: Math.round(((Date.now() - startTime) / 1000) % 60).toString().padStart(2, '0'),
                     minutes: Math.floor((((Date.now() - startTime) / 1000) / 60) % 60).toString().padStart(2, '0'),
-                    hours: Math.floor(Math.floor((((Date.now() - startTime) / 1000) / 60) % 60) / 60).toString().padStart(2, '0'),
+                    hours: Math.floor(((((Date.now() - startTime) / 1000) / 60) % 60) / 60).toString().padStart(2, '0'),
                 });
 
-            }, 10);
+            }, 5);
 
         } else if (!isRunning) {
 
@@ -81,13 +81,13 @@ const StopWatch = () => {
             {
                 <div className="time">
                     {fullTime.hours}:
-                {fullTime.minutes}:
-                {fullTime.seconds}:
-                {fullTime.miliseconds}
+                    {fullTime.minutes}:
+                    {fullTime.seconds}:
+                    {fullTime.miliseconds}
                 </div>
             }
             <button className='control-button' onClick={toggleRun}>{isRunning ? 'Stop' : 'Start'}</button>
-            <button className='control-button' onClick={lap}>Lap</button>
+            <button className='control-button' onClick={lap} disabled={!isRunning}>Lap</button>
             <button className='control-button' onClick={resetTimer}>Reset</button>
             <div>
                 {laps.length ? <button className='control-button' onClick={clearAllLaps}>Reset Laps</button> : ''}
